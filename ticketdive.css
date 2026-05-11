@@ -1,0 +1,561 @@
+/* ===================================================
+   TicketDive風 デジタルチケット - WordPress用CSS
+   対象: ページテンプレート / カスタムHTML ブロック
+   =================================================== */
+
+/* ── Google Fonts ───────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&family=Share+Tech+Mono&display=swap');
+
+/* ── CSS Variables ──────────────────────────────── */
+:root {
+  --td-accent:     #00e5ff;
+  --td-accent2:    #ff4081;
+  --td-bg:         #0a0a0f;
+  --td-surface:    #13131e;
+  --td-card:       #1a1a2e;
+  --td-border:     rgba(0, 229, 255, 0.18);
+  --td-text:       #e8eaf0;
+  --td-muted:      #7b7d8a;
+  --td-font-head:  'Bebas Neue', sans-serif;
+  --td-font-body:  'Noto Sans JP', sans-serif;
+  --td-font-mono:  'Share Tech Mono', monospace;
+  --td-radius:     18px;
+  --td-shadow:     0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* ── Page / Body reset ──────────────────────────── */
+.td-page {
+  background: var(--td-bg);
+  min-height: 100vh;
+  font-family: var(--td-font-body);
+  color: var(--td-text);
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Bottom Navigation ──────────────────────────── */
+.td-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(19, 19, 30, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--td-border);
+  padding: 10px 0 env(safe-area-inset-bottom, 10px);
+}
+
+.td-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--td-muted);
+  font-size: 10px;
+  font-family: var(--td-font-body);
+  transition: color 0.2s;
+  padding: 4px 10px;
+}
+
+.td-nav a:hover,
+.td-nav a.active {
+  color: var(--td-accent);
+}
+
+.td-nav a svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* ── Scrolling Marquee Banner ───────────────────── */
+.td-marquee-wrap {
+  overflow: hidden;
+  background: var(--td-surface);
+  border-bottom: 1px solid var(--td-border);
+  padding: 8px 0;
+}
+
+.td-marquee-track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: tdMarquee 18s linear infinite;
+  width: max-content;
+}
+
+.td-marquee-item {
+  font-family: var(--td-font-head);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--td-accent);
+  opacity: 0.55;
+  user-select: none;
+}
+
+@keyframes tdMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Main Content Area ──────────────────────────── */
+.td-main {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+
+/* ── Ticket Card ────────────────────────────────── */
+.td-ticket {
+  position: relative;
+  border-radius: var(--td-radius);
+  overflow: hidden;
+  background: var(--td-card);
+  box-shadow: var(--td-shadow), 0 0 0 1px var(--td-border);
+  margin-bottom: 20px;
+}
+
+/* Hero Image */
+.td-ticket__hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1a1a3e 100%);
+}
+
+.td-ticket__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.td-ticket__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--td-card) 100%);
+}
+
+/* Artist Avatar */
+.td-ticket__avatar {
+  position: absolute;
+  bottom: -28px;
+  left: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--td-accent);
+  overflow: hidden;
+  background: var(--td-surface);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  z-index: 2;
+}
+
+.td-ticket__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ticket Body */
+.td-ticket__body {
+  padding: 40px 20px 20px;
+}
+
+.td-ticket__event-name {
+  font-family: var(--td-font-head);
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin: 0 0 4px;
+  line-height: 1.1;
+}
+
+.td-ticket__venue {
+  font-size: 12px;
+  color: var(--td-muted);
+  margin: 0 0 16px;
+  letter-spacing: 0.05em;
+}
+
+/* Info Grid */
+.td-ticket__info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.td-info-cell {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--td-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.td-info-cell__label {
+  font-size: 10px;
+  color: var(--td-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.td-info-cell__value {
+  font-family: var(--td-font-mono);
+  font-size: 15px;
+  color: var(--td-text);
+}
+
+.td-info-cell--accent .td-info-cell__value {
+  color: var(--td-accent);
+}
+
+/* Perforated Divider */
+.td-perforated {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 4px 0;
+}
+
+.td-perforated__notch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--td-bg);
+  flex-shrink: 0;
+}
+
+.td-perforated__line {
+  flex: 1;
+  border: none;
+  border-top: 2px dashed rgba(255,255,255,0.1);
+  margin: 0;
+}
+
+/* QR Code Section */
+.td-ticket__qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 12px;
+}
+
+.td-ticket__qr-wrap {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-ticket__qr-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  background: conic-gradient(from 0deg, var(--td-accent), var(--td-accent2), var(--td-accent));
+  animation: tdQrSpin 4s linear infinite;
+  z-index: 0;
+}
+
+@keyframes tdQrSpin {
+  to { transform: rotate(360deg); }
+}
+
+.td-ticket__qr-inner {
+  position: relative;
+  z-index: 1;
+  width: 174px;
+  height: 174px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-ticket__qr-inner img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.td-ticket__holder {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.td-ticket__seat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,229,255,0.12);
+  border: 1px solid var(--td-accent);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-family: var(--td-font-mono);
+  font-size: 14px;
+  color: var(--td-accent);
+  letter-spacing: 0.1em;
+}
+
+/* ── "入場済" Badge ──────────────────────────────── */
+.td-badge-admitted {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(255, 64, 129, 0.15);
+  border: 1px solid var(--td-accent2);
+  color: var(--td-accent2);
+  font-family: var(--td-font-head);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+}
+
+/* ── Time Display ───────────────────────────────── */
+.td-time-display {
+  font-family: var(--td-font-mono);
+  font-size: 13px;
+  color: var(--td-muted);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+/* ── Action Buttons ─────────────────────────────── */
+.td-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.td-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 24px;
+  border-radius: 12px;
+  font-family: var(--td-font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  text-decoration: none;
+}
+
+.td-btn:active {
+  transform: scale(0.97);
+}
+
+.td-btn--primary {
+  background: linear-gradient(135deg, var(--td-accent) 0%, #0088cc 100%);
+  color: #000;
+  box-shadow: 0 4px 20px rgba(0,229,255,0.35);
+}
+
+.td-btn--primary:hover {
+  box-shadow: 0 6px 28px rgba(0,229,255,0.55);
+}
+
+.td-btn--secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--td-text);
+  border: 1px solid var(--td-border);
+}
+
+.td-btn--secondary:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+.td-btn--disabled,
+.td-btn[disabled] {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.td-btn--ghost {
+  background: transparent;
+  color: var(--td-accent);
+  border: 1px solid var(--td-accent);
+}
+
+/* ── Detail Link ─────────────────────────────────── */
+.td-detail-link {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: var(--td-muted);
+  text-decoration: none;
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.td-detail-link:hover {
+  color: var(--td-accent);
+}
+
+/* ── Confirmation Modal ─────────────────────────── */
+.td-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.td-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.td-modal {
+  background: var(--td-card);
+  border-radius: 22px 22px 0 0;
+  padding: 28px 24px 40px;
+  width: 100%;
+  max-width: 430px;
+  border-top: 1px solid var(--td-border);
+  transform: translateY(40px);
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+  text-align: center;
+}
+
+.td-modal-overlay.open .td-modal {
+  transform: translateY(0);
+}
+
+.td-modal__icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.td-modal__title {
+  font-family: var(--td-font-head);
+  font-size: 22px;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+}
+
+.td-modal__body {
+  font-size: 13px;
+  color: var(--td-muted);
+  margin: 0 0 6px;
+  line-height: 1.7;
+}
+
+.td-modal__warning {
+  font-size: 12px;
+  color: var(--td-accent2);
+  margin: 0 0 24px;
+  line-height: 1.7;
+}
+
+.td-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Share / Distribute row ─────────────────────── */
+.td-sub-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px 16px;
+}
+
+.td-sub-actions .td-btn {
+  flex: 1;
+  font-size: 13px;
+  padding: 12px;
+}
+
+/* ── Shimmer Skeleton (loading state) ───────────── */
+@keyframes tdShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.td-skeleton {
+  border-radius: 8px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: tdShimmer 1.4s ease-in-out infinite;
+}
+
+/* ── Utilities ──────────────────────────────────── */
+.td-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── WordPress Gutenberg override ──────────────── */
+/* フルワイドブロック内でページ幅を制限しない場合 */
+.wp-block-group.td-page .entry-content,
+.td-page .wp-block-columns {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.td-page .site-main,
+.td-page article {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* フッター/ヘッダーを非表示にしたい場合 */
+.td-fullscreen .site-header,
+.td-fullscreen .site-footer,
+.td-fullscreen .entry-title {
+  display: none !important;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (min-width: 500px) {
+  .td-main {
+    padding-top: 32px;
+  }
+  .td-ticket__event-name {
+    font-size: 32px;
+  }
+}
