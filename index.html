@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;html lang="ja"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;チケット詳細 | TicketDive&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--accent: #e63946;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--bg: #0a0a0a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--card-bg: #111;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text: #f1f1f1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--muted: #888;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--border: rgba(255,255,255,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1">```</p>
+<p class="p1">* { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1">body {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: var(--bg);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Noto Sans JP', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 24px 16px 80px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">header {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>max-width: 420px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 12px 0 24px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.logo {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Bebas Neue', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 1.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.12em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--accent);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ── Ticket Card ── */</p>
+<p class="p1">.ticket-wrapper {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>max-width: 380px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>perspective: 1000px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>animation: floatIn 0.7s cubic-bezier(0.22,1,0.36,1) both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: relative;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">@keyframes floatIn {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>from { opacity: 0; transform: translateY(32px) scale(0.97); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>to <span class="Apple-converted-space">  </span>{ opacity: 1; transform: translateY(0) scale(1); }</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Color bar top */</p>
+<p class="p1">.ticket-color-bar {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: var(--accent);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Hero image area */</p>
+<p class="p1">.ticket-hero {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 180px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: center;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-hero .watermark {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>opacity: 0.06;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Bebas Neue', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>user-select: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pointer-events: none;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-hero .event-label {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.15em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: rgba(255,255,255,0.5);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-hero .event-name {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Bebas Neue', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.08em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>line-height: 1;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Body */</p>
+<p class="p1">.ticket-body {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 20px 20px 0;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-row {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>margin-bottom: 18px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-field label {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.65rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.12em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>margin-bottom: 4px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-field .value {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-weight: 700;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-field .value.large {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Bebas Neue', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 2.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.05em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>line-height: 1;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Divider */</p>
+<p class="p1">.ticket-divider {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-top: 1px dashed var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>margin: 4px 0 18px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* QR area */</p>
+<p class="p1">.ticket-qr {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>gap: 12px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.qr-box {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 140px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 140px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 10px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.qr-box svg {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 100%;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.ticket-id {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.72rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.14em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Status badge */</p>
+<p class="p1">.status-badge {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>gap: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: rgba(230,57,70,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border: 1px solid rgba(230,57,70,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.12em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 4px 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 100px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.status-badge .dot {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>animation: pulse 1.4s infinite;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">@keyframes pulse {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>0%, 100% { opacity: 1; transform: scale(1); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>50% <span class="Apple-converted-space">      </span>{ opacity: 0.4; transform: scale(0.7); }</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Action buttons */</p>
+<p class="p1">.ticket-actions {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 16px 20px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>gap: 10px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.btn {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family: 'Noto Sans JP', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.05em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>transition: transform 0.15s, opacity 0.15s;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.btn:active { transform: scale(0.97); opacity: 0.85; }</p>
+<p class="p2"><br></p>
+<p class="p1">.btn-primary {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: #fff;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.btn-secondary {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--text);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* Bottom nav */</p>
+<p class="p1">nav.bottom {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>right: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: rgba(10,10,10,0.92);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: space-around;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding: 10px 0 16px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">nav.bottom a {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>gap: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-size: 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>letter-spacing: 0.08em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>transition: color 0.2s;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">nav.bottom a.active { color: var(--accent); }</p>
+<p class="p1">nav.bottom a svg { width: 20px; height: 20px; }</p>
+<p class="p1">```</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="logo"&gt;TicketDive&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="status-badge"&gt;&lt;span class="dot"&gt;&lt;/span&gt;有効&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="ticket-wrapper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ticket"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-color-bar"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">```</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Hero --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="ticket-hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="watermark"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>TicketDive TicketDive TicketDive TicketDive TicketDive</p>
+<p class="p1"><span class="Apple-converted-space">      </span>TicketDive TicketDive TicketDive TicketDive TicketDive</p>
+<p class="p1"><span class="Apple-converted-space">      </span>TicketDive TicketDive TicketDive TicketDive TicketDive</p>
+<p class="p1"><span class="Apple-converted-space">      </span>TicketDive TicketDive TicketDive TicketDive TicketDive</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="event-name" id="eventName"&gt;EVENT&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="event-label"&gt;LIVE TICKET&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Body --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="ticket-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ticket-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;氏名&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value" id="holderName"&gt;— さま&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field" style="text-align:right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;整理番号&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value large" id="seatNo"&gt;SA-0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;hr class="ticket-divider" /&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ticket-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;会場&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value" id="venue"&gt;—&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field" style="text-align:right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;日付&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value" id="eventDate"&gt;—&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ticket-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;開場&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value" id="openTime"&gt;OPEN —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ticket-field" style="text-align:right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;開演&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="value" id="startTime"&gt;START —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- QR --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="ticket-qr"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="qr-box" id="qrContainer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- QR SVG generated by JS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="ticket-id" id="ticketId"&gt;TICKET ID: —&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Actions --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="ticket-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn btn-secondary"&gt;分配する&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn btn-primary"&gt;入場する&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">```</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Bottom Nav --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav class="bottom"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>トップ</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>お気に入り</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" class="active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;rect x="2" y="3" width="20" height="14" rx="2"/&gt;&lt;path d="M8 21h8M12 17v4"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>チケット</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/&gt;&lt;circle cx="12" cy="7" r="4"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>アカウント</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Minimal QR generator (no external lib) --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// ── URL params → fill fields ──</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const params = new URLSearchParams(location.search);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const set = (id, val) =&gt; { if (val) document.getElementById(id).textContent = val; };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('eventName',<span class="Apple-converted-space">  </span>params.get('event_name') || 'EVENT NAME');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('holderName', params.get('name')<span class="Apple-converted-space">        </span>? params.get('name') + ' さま' : 'ゲスト さま');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('seatNo', <span class="Apple-converted-space">    </span>params.get('seat')<span class="Apple-converted-space">        </span>|| 'SA-0');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('venue',<span class="Apple-converted-space">      </span>params.get('venue') <span class="Apple-converted-space">      </span>|| '会場未定');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('eventDate',<span class="Apple-converted-space">  </span>params.get('date')<span class="Apple-converted-space">        </span>|| '—');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('openTime', <span class="Apple-converted-space">  </span>'OPEN ' + (params.get('open')<span class="Apple-converted-space">  </span>|| '—'));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>set('startTime',<span class="Apple-converted-space">  </span>'START ' + (params.get('start') || '—'));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ticketId = params.get('event') || 'UNKNOWN';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('ticketId').textContent = 'TICKET ID: ' + ticketId.toUpperCase();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// ── Simple QR placeholder (uses Google Charts API) ──</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const qrUrl = `https://chart.googleapis.com/chart?chs=120x120&amp;cht=qr&amp;chl=${encodeURIComponent(location.href)}&amp;choe=UTF-8`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const img = document.createElement('img');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.src = qrUrl;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.width = '100%';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.height = '100%';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.borderRadius = '4px';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('qrContainer').appendChild(img);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
